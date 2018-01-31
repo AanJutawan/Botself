@@ -203,9 +203,9 @@ KAC=[kr]
 mid = kr.getProfile().mid
 
 Bots=[mid]
-owner=["ue8dfb935c47521f44fbe6f8a1086b40a",mid]
-admin=["ue8dfb935c47521f44fbe6f8a1086b40a",mid]
-baby=["ue8dfb935c47521f44fbe6f8a1086b40a"]#chery/barby/ranita
+owner=["ub76a0153a283da9a1443dfb043181335",mid]
+admin=["ub76a0153a283da9a1443dfb043181335",mid]
+baby=["ub76a0153a283da9a1443dfb043181335"]
 
 wait = {
     'likeOn':False,
@@ -1256,11 +1256,11 @@ def bot(op):
                 else:md+="╠❂➣Cancel Protect:off [❌]\n╚═════════════"
                 kr.sendText(msg.to,md)
                 msg.contentType = 13
-                msg.contentMetadata = {'mid': "ue8dfb935c47521f44fbe6f8a1086b40a"}
+                msg.contentMetadata = {'mid': "ub76a0153a283da9a1443dfb043181335"
                 kr.sendMessage(msg)
             elif cms(msg.text,["creator","Creator"]):
                 msg.contentType = 13
-                msg.contentMetadata = {'mid': "ue8dfb935c47521f44fbe6f8a1086b40a"}
+                msg.contentMetadata = {'mid': "ub76a0153a283da9a1443dfb043181335"}
                 kr.sendMessage(msg)
                 kr.sendText(msg.to,'❂➣ Creator yang gans sangad  􀜁􀄯􏿿')
             elif msg.text.lower() == 'autoadd on':
@@ -1778,7 +1778,30 @@ def bot(op):
                                 kr.sendText(msg.to,"السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ")
                                 kr.sendText(msg.to,"وَعَلَيْكُمْ السَّلاَمُ وَرَحْمَةُ اللهِوَبَرَكَاتُهُ")
                                 kr.sendText(msg.to,"Nah salamnya jawab sendiri dah")
-            elif ("Kick " in msg.text):
+            elif " praytime " in msg.text.lower():
+            	if msg.from_ in admin:
+                            pisah = msg.text.split("e ")
+                            location = msg.text.replace(pisah[0]+"e ","")
+                            params = {'lokasi':location}
+                            with requests.session() as web:
+                                r = requests.get("http://api.corrykalam.net/apisholat.php?" + urllib.urlencode(params))
+                                data = r.text
+                                data = json.loads(data)
+                                if data[1] != "Subuh : " and data[2] != "Dzuhur : " and data[3] != "Ashr : " and data[4] != "Maghrib : " and data[5] != "Isha : ":
+                                    ret_ = "[ Prayer Schedule ]"
+                                    ret_ += "\n\nLocation : " + data[0]
+                                    ret_ += "\n" + data[1]
+                                    ret_ += "\n" + data[2]
+                                    ret_ += "\n" + data[3]
+                                    ret_ += "\n" + data[4]
+                                    ret_ += "\n" + data[5]
+                                else:
+                                    ret_ = "[ Prayer Schedule ] Error : Location not found" 
+                                kr.sendText(msg.to, str(ret_))
+                                                    
+#==========================================================================================================================
+           
+           elif ("Kick " in msg.text):
                    targets = []
                    key = eval(msg.contentMetadata["MENTION"])
                    key["MENTIONEES"] [0] ["M"]
